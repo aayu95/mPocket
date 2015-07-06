@@ -7,7 +7,7 @@
     android:background="#ffffffff">
 
     <ImageView
-        android:src="@drawable/images3"
+        android:src="@drawable/mywallet_logo"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
