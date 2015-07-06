@@ -23,4 +23,14 @@
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
 
+    <TextView
+        android:id="@+id/balance"
+        android:text="0000 "
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="100sp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
+
 </LinearLayout>
