@@ -25,7 +25,8 @@
 
     <TextView
         android:id="@+id/balance"
-        android:text="0000 "
+        android:text="0000"
+        android:textAlignment="center"
         android:gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

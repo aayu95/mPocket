@@ -20,8 +20,8 @@ public class MyWallet extends ActionBarActivity {
 
         balance = (TextView) findViewById(R.id.balance);
 
-       // Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/digital-7 (italic).ttf");
-       // balance.setTypeface(tf);
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/digital-7 (mono).ttf");
+        balance.setTypeface(tf);
 
     }
 }
