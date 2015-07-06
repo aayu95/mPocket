@@ -30,7 +30,7 @@
             android:src="@drawable/ic_launcher"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
-            android:background="#ffd3f7c3"/>
+            android:background="#fff7f47d"/>
 
 
         <ImageButton
@@ -41,7 +41,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginBottom="5dp"
             android:src="@drawable/ic_launcher"
-            android:background="#ffd3f7c3" />
+            android:background="#81d4fa" />
 
     </LinearLayout>
 
@@ -60,7 +60,7 @@
             android:onClick="generateMessage"
             android:layout_marginTop="5dp"
             android:src="@drawable/ic_launcher"
-            android:background="#ffd3f7c3" />
+            android:background="#ff66e06c" />
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -70,7 +70,7 @@
             android:layout_marginTop="5dp"
             android:onClick="generateMessage"
             android:src="@drawable/ic_launcher"
-            android:background="#ffd3f7c3" />
+            android:background="#f44336" />
 
     </LinearLayout>
 
