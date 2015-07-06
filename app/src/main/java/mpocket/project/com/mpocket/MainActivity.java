@@ -1,5 +1,6 @@
 package mpocket.project.com.mpocket;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -40,5 +41,10 @@ public class MainActivity extends ActionBarActivity {
 
     public void generateMessage(View view) {
         Toast.makeText(this, "Button Selected", Toast.LENGTH_SHORT).show();
+    }
+
+    public void MyWalletActivity(View view) {
+        Intent go = new Intent(this, MyWallet.class);
+        startActivity(go);
     }
 }
