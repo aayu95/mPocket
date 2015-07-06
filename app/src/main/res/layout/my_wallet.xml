@@ -8,37 +8,19 @@
 
     <ImageView
         android:src="@drawable/images3"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+
     <TextView
-        android:text="Available Balance: "
+        android:text="Your Available Balance is: "
         android:gravity="center_horizontal"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
-    <TextView
-        android:text="Available Balance: "
-        android:gravity="center_horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
-    <TextView
-        android:text="Available Balance: "
-        android:gravity="center_horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
-    <TextView
-        android:text="Available Balance: "
-        android:gravity="center_horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
 </LinearLayout>
