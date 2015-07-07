@@ -22,6 +22,7 @@ public class SplashScreen extends Activity {
             public void run() {
                 Intent proceedToMain = new Intent(SplashScreen.this, MainActivity.class);
                 startActivity(proceedToMain);
+                finish();
             }
         }, SCREEN_TIMEOUT);
     }
