@@ -12,7 +12,8 @@
         <!-- SplashScreen -->
         <activity
             android:name=".SplashScreen"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,14 +26,16 @@
         <!-- MainActivity -->
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
 
         </activity>
 
-        <!-- MainActivity -->
+        <!-- MyWallet -->
         <activity
             android:name=".MyWallet"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"/>
 
     </application>
 
