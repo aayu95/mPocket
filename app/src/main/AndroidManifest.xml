@@ -37,6 +37,13 @@
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"/>
 
+        <!--PersonalExpenses-->
+        <activity
+            android:name=".PersonalExpenses"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+
     </application>
+
 
 </manifest>

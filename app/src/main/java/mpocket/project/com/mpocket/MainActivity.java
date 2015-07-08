@@ -47,4 +47,10 @@ public class MainActivity extends ActionBarActivity {
         Intent go = new Intent(this, MyWallet.class);
         startActivity(go);
     }
+
+    public void PersonalExpensesActivity(View view) {
+        Intent go = new Intent(this, PersonalExpenses.class);
+        startActivity(go);
+    }
+
 }
