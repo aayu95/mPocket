@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+
 /**
  * Created by abhishek on 8/7/15.
  */
@@ -57,14 +58,15 @@ public class PersonalExpenses extends ActionBarActivity {
 
         customCalenderDialog.setView(dialogView);
 
+
+
         customCalenderDialog.setCancelable(true);
         customCalenderDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
             }
-        });
-        customCalenderDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -72,7 +74,9 @@ public class PersonalExpenses extends ActionBarActivity {
         });
 
 
+
         customCalenderDialog.create().show();
+
 
     }
 
