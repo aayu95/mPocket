@@ -9,4 +9,8 @@
         <item name="colorPrimaryDark">#388E3C</item>
     </style>
 
+    <style name="SplashScreenTheme" parent="AppTheme">
+        <item name="colorPrimaryDark">#ff000000</item>
+    </style>
+
 </resources>
