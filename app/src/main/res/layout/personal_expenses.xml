@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:visibility="visible"
-    android:nestedScrollingEnabled="true"
-    android:layoutMode="clipBounds"
-    android:foregroundGravity="center_vertical">
+    android:orientation="vertical"
+    android:layout_height="match_parent">
 
-    <CalendarView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:nestedScrollingEnabled="true">
-
-    </CalendarView>
-
-</FrameLayout>
+    <TextView
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/dateText" />
+</LinearLayout>

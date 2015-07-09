@@ -2,32 +2,11 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Abhishek\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.0\support-annotations-22.2.0.jar"
+        jar="/home/abhishek/git/mPocket/app/build/intermediates/exploded-aar/com.prolificinteractive/material-calendarview/0.6.1/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
-        <dex dex="C:\Users\Abhishek\Desktop\mPocket\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.0-1c8ceb0328ca5939888c4b6350989d48f57ebb85.jar" />
-    </item>
-    <item
-        jar="C:\Users\Abhishek\Desktop\mPocket\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\libs\internal_impl-22.2.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
-        <dex dex="C:\Users\Abhishek\Desktop\mPocket\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-d8359484102edcc034b470cebea139b719e08113.jar" />
-    </item>
-    <item
-        jar="C:\Users\Abhishek\Desktop\mPocket\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
-        <dex dex="C:\Users\Abhishek\Desktop\mPocket\app\build\intermediates\pre-dexed\debug\classes-313d183eb64fa24fcd593a0389d283f2aa77635d.jar" />
-    </item>
-    <item
-        jar="C:\Users\Abhishek\Desktop\mPocket\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
-        <dex dex="C:\Users\Abhishek\Desktop\mPocket\app\build\intermediates\pre-dexed\debug\classes-005b159f7da5ec012fea1129a5bce89b6210bb28.jar" />
+        sha1="3cead7e8ff91cbcec736d8eb92e2097c5d20988f">
+        <dex dex="/home/abhishek/git/mPocket/app/build/intermediates/pre-dexed/debug/classes-9e7e007ddf4b37de98e049076befc7ede0206616.jar" />
     </item>
 
 </items>
