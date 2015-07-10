@@ -12,18 +12,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.Calendar;
+
 
 
 /**
  * Created by abhishek on 8/7/15.
  */
 public class PersonalExpenses extends ActionBarActivity {
+
     Calendar calender = Calendar.getInstance();
+
     int Year = calender.get(Calendar.YEAR),
             Month = calender.get(Calendar.MONTH),
             Day = calender.get(Calendar.DAY_OF_MONTH);
@@ -35,7 +36,9 @@ public class PersonalExpenses extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.personal_expenses);
         getSupportActionBar().setTitle("myExpenses");
-        String message = Day + "/" + (Month+1) + "/" + Year;
+
+        String message = makeDate(Day, (Month+1), Year);
+
         TextView setDateText = (TextView) findViewById(R.id.dateText);
         setDateText.setText(message);
     }
@@ -55,6 +58,7 @@ public class PersonalExpenses extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+
         if (id == R.id.action_calender) {
             startCalenderDialog();
             return true;
@@ -69,9 +73,10 @@ public class PersonalExpenses extends ActionBarActivity {
     private void addNewEvent() {
         Context context = this;
         LayoutInflater inflater = LayoutInflater.from(context);
-        String message = Day + "/" + (Month+1) + "/" + Year;
 
-        View dialogView = inflater.inflate(R.layout.add_new_event, null);
+        String message = makeDate(Day, (Month+1), Year);
+
+        View dialogView = inflater.inflate(R.layout.add_new_expenditure, null);
 
         final AlertDialog.Builder customEventDialog = new AlertDialog.Builder(context);
 
@@ -116,14 +121,55 @@ public class PersonalExpenses extends ActionBarActivity {
 
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            Year = year; Month = monthOfYear; Day = dayOfMonth;
-            String message = dayOfMonth + "/" + (monthOfYear+1) + "/" + year;
+            Year = year;
+            Month = monthOfYear;
+            Day = dayOfMonth;
+
+            String message = makeDate(dayOfMonth, (monthOfYear+1), year);
             Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+
             TextView dateText = (TextView) findViewById(R.id.dateText);
             dateText.setText(message);
 
         }
     };
+
+
+    String makeDate(int day_of_month, int month, int year) {
+        String date = day_of_month + " " + makeMonth(month) + " " + year;
+        return date;
+    }
+
+    private String makeMonth(int month) {
+        String mMonth = "";
+        if (month == 1) {
+            mMonth = "January";
+        } else if (month == 2) {
+            mMonth = "February";
+        } else if (month == 3) {
+            mMonth = "March";
+        } else if (month == 4){
+            mMonth = "April";
+        } else if (month == 5) {
+            mMonth = "May";
+        } else if (month == 6) {
+            mMonth = "June";
+        } else if (month == 7) {
+            mMonth = "July";
+        } else if (month == 8) {
+            mMonth = "August";
+        } else if (month == 9) {
+            mMonth = "September";
+        } else if (month == 10) {
+            mMonth = "October";
+        } else if (month == 11) {
+            mMonth = "November";
+        } else if (month == 12) {
+            mMonth = "December";
+        }
+
+        return mMonth;
+    }
 
 
 }
