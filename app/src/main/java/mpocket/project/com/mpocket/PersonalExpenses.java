@@ -202,35 +202,42 @@ public class PersonalExpenses extends ActionBarActivity {
         final Context context = this;
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        TextView setDateText = (TextView) findViewById(R.id.dateText);
+        int Year = calender.get(Calendar.YEAR),
+                Month = calender.get(Calendar.MONTH),
+                Day = calender.get(Calendar.DAY_OF_MONTH);
 
 
-        String date =  setDateText.getText().toString();
+        String date =  makeDate(Day, (Month + 1), Year);
 
         View dialogView = inflater.inflate(R.layout.add_new_expenditure, null);
 
         final AlertDialog.Builder customEventDialog = new AlertDialog.Builder(context);
 
+        final EditText currentDate = (EditText) dialogView.findViewById(R.id.currentDate);
+        currentDate.setText("Date: " + date);
         final EditText purposeText = (EditText) dialogView.findViewById(R.id.eventName);
         final EditText amountText = (EditText) dialogView.findViewById(R.id.amount);
-        final EditText dateText = (EditText) dialogView.findViewById(R.id.dateEdit);
-        dateText.setText(date);
 
         customEventDialog.setView(dialogView);
-        customEventDialog.setTitle("Date: " + date);
+        customEventDialog.setTitle("Today's new Expense");
         customEventDialog.setCancelable(true);
         customEventDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
                 float amount = Float.parseFloat(String.valueOf(amountText.getText()));
-                String date = String.valueOf(dateText.getText());
+                int Year = calender.get(Calendar.YEAR),
+                        Month = calender.get(Calendar.MONTH),
+                        Day = calender.get(Calendar.DAY_OF_MONTH);
+
+
+                String date =  makeDate(Day, (Month + 1), Year);
                 String purpose = String.valueOf(purposeText.getText());
 
                 PersonalExpensesData newData = new PersonalExpensesData(amount, purpose, date);
                 PersonalExpensesDatabase db = new PersonalExpensesDatabase(context);
                 db.addNewExpense(newData);
-                printExpenses();
+                showCurrentDayExpenses();
                 Toast.makeText(getApplicationContext(), "Expenditure Added", Toast.LENGTH_SHORT).show();
                 db.close();
             }
@@ -253,9 +260,11 @@ public class PersonalExpenses extends ActionBarActivity {
 
     @Override
     public Dialog onCreateDialog(int id) {
+
         if (id == DIALOG_ID) {
             return new DatePickerDialog(this, dPickerListener, Year, Month, Day);
         }
+
         return null;
     }
 
@@ -323,8 +332,7 @@ public class PersonalExpenses extends ActionBarActivity {
                 Day = calender.get(Calendar.DAY_OF_MONTH);
         String date = makeDate(Day, (Month+1), Year);
         TextView setDateText = (TextView) findViewById(R.id.dateText);
-        setDateText.setText(date);
-        setDateText.setVisibility(View.GONE);
+        setDateText.setText("All Expenses");
 
         PersonalExpensesDatabase db = new PersonalExpensesDatabase(this);
 
