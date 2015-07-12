@@ -91,7 +91,7 @@ public class PersonalExpensesDatabase extends SQLiteOpenHelper {
     public List<PersonalExpensesData> showAllExpenses() {
         List<PersonalExpensesData> expenseList = new ArrayList<PersonalExpensesData>();
 
-        String selectQuery = "SELECT  * FROM " + TABLE_NAME;
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME + " order by id desc";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -115,7 +115,8 @@ public class PersonalExpensesDatabase extends SQLiteOpenHelper {
     public List<PersonalExpensesData> showAllExpensesByDate(String date) {
         List<PersonalExpensesData> expenseList = new ArrayList<PersonalExpensesData>();
 
-        String selectQuery = "SELECT  * FROM " + TABLE_NAME + " where " + KEY_DATE + " = \"" + date + "\"";
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME + " where " + KEY_DATE + " = \"" + date +
+                "\"" + " order by id desc";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
