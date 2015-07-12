@@ -10,7 +10,7 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/eventName"
+        android:id="@+id/purpose"
         android:hint="Expenditure Purpose"
         android:layout_width="match_parent"
         android:layout_marginBottom="5dp"

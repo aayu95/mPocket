@@ -14,10 +14,22 @@
 
     <item
         android:id="@+id/action_calender"
-        android:icon="@drawable/ic_action_event"
+        android:icon="@drawable/ic_action_go_to_today"
         android:title="@string/action_calender"
         android:orderInCategory="2"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_go_to_today"
+        android:title="Go to Today"
+        android:orderInCategory="3"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/show_all_expenses"
+        android:orderInCategory="4"
+        android:title="Show all expenses"
+        app:showAsAction="never" />
 
 
 </menu>
