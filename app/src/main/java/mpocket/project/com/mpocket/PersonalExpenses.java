@@ -217,6 +217,7 @@ public class PersonalExpenses extends ActionBarActivity {
         currentDate.setText("Date: " + date);
         final EditText purposeText = (EditText) dialogView.findViewById(R.id.eventName);
         final EditText amountText = (EditText) dialogView.findViewById(R.id.amount);
+        amountText.setText("0");
 
         customEventDialog.setView(dialogView);
         customEventDialog.setTitle("Today's new Expense");
@@ -236,6 +237,8 @@ public class PersonalExpenses extends ActionBarActivity {
 
                 PersonalExpensesData newData = new PersonalExpensesData(amount, purpose, date);
                 PersonalExpensesDatabase db = new PersonalExpensesDatabase(context);
+
+
                 db.addNewExpense(newData);
                 showCurrentDayExpenses();
                 Toast.makeText(getApplicationContext(), "Expenditure Added", Toast.LENGTH_SHORT).show();

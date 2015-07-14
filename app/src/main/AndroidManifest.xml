@@ -44,6 +44,18 @@
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
 
+        <!-- Loans Activity -->
+        <activity
+            android:name=".Loans"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- Debts Activity -->
+        <activity
+            android:name=".Debts"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 

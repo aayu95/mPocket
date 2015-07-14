@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -13,10 +12,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
-
-    public void generateMessage(View view) {
-        Toast.makeText(this, "Button Selected", Toast.LENGTH_SHORT).show();
     }
 
     public void MyWalletActivity(View view) {
@@ -29,4 +24,13 @@ public class MainActivity extends ActionBarActivity {
         startActivity(go);
     }
 
+    public void LoanActivity(View view) {
+        Intent go = new Intent(this, Loans.class);
+        startActivity(go);
+    }
+
+    public void DebtActivity(View view) {
+        Intent go = new Intent(this, Debts.class);
+        startActivity(go);
+    }
 }
