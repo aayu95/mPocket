@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -157,22 +158,32 @@ public class PersonalExpenses extends ActionBarActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                float amount = Float.parseFloat(String.valueOf(amountText.getText()));
-                String date = String.valueOf(dateText.getText());
-                String purpose = String.valueOf(purposeText.getText());
 
-                newData.set_amount(amount);
-                newData.set_purpose(purpose);
-                newData.set_date(date);
-                PersonalExpensesDatabase db = new PersonalExpensesDatabase(context);
-                db.editContact(newData);
-                if (ALL_EXPENSES_VISIBLE) {
-                    showAllExpensesTillDate();
+                if (amountText.getText().toString().equals("") || dateText.getText().toString().equals("") || purposeText.getText().toString().equals("")) {
+                    if (dateText.getText().toString().equals("")) {
+                        String message = "Edit failed because you did not enter any date";
+                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                    } else {
+                        String message = "Edit failed because you did not enter any amount or purpose";
+                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                    }
                 } else {
-                    printExpenses();
+                    float amount = Float.parseFloat(String.valueOf(amountText.getText()));
+                    String date = String.valueOf(dateText.getText());
+                    String purpose = String.valueOf(purposeText.getText());
+                    newData.set_amount(amount);
+                    newData.set_purpose(purpose);
+                    newData.set_date(date);
+                    PersonalExpensesDatabase db = new PersonalExpensesDatabase(context);
+                    db.editContact(newData);
+                    if (ALL_EXPENSES_VISIBLE) {
+                        showAllExpensesTillDate();
+                    } else {
+                        printExpenses();
+                    }
+                    Toast.makeText(getApplicationContext(), "Edit Successful", Toast.LENGTH_SHORT).show();
+                    db.close();
                 }
-                Toast.makeText(getApplicationContext(), "Edit Successful", Toast.LENGTH_SHORT).show();
-                db.close();
             }
         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
@@ -217,7 +228,7 @@ public class PersonalExpenses extends ActionBarActivity {
         currentDate.setText("Date: " + date);
         final EditText purposeText = (EditText) dialogView.findViewById(R.id.eventName);
         final EditText amountText = (EditText) dialogView.findViewById(R.id.amount);
-        amountText.setText("0");
+        //amountText.setText("0");
 
         customEventDialog.setView(dialogView);
         customEventDialog.setTitle("Today's new Expense");
@@ -226,23 +237,28 @@ public class PersonalExpenses extends ActionBarActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                float amount = Float.parseFloat(String.valueOf(amountText.getText()));
                 int Year = calender.get(Calendar.YEAR),
                         Month = calender.get(Calendar.MONTH),
                         Day = calender.get(Calendar.DAY_OF_MONTH);
 
-
                 String date =  makeDate(Day, (Month + 1), Year);
                 String purpose = String.valueOf(purposeText.getText());
 
-                PersonalExpensesData newData = new PersonalExpensesData(amount, purpose, date);
                 PersonalExpensesDatabase db = new PersonalExpensesDatabase(context);
+                if (amountText.getText().toString().equals("") || purposeText.getText().toString().equals("")) {
+                    amountText.setError("Enter an amount");
+                    purposeText.setError("Enter a purpose");
+                    String message = "Expense not added because you did not enter any purpose or amount";
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                } else {
+                    float amount = Float.parseFloat(String.valueOf(amountText.getText()));
+                    PersonalExpensesData newData = new PersonalExpensesData(amount, purpose, date);
+                    db.addNewExpense(newData);
+                    showCurrentDayExpenses();
+                    Toast.makeText(getApplicationContext(), "Expenditure Added", Toast.LENGTH_SHORT).show();
+                    db.close();
+                }
 
-
-                db.addNewExpense(newData);
-                showCurrentDayExpenses();
-                Toast.makeText(getApplicationContext(), "Expenditure Added", Toast.LENGTH_SHORT).show();
-                db.close();
             }
         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
@@ -399,8 +415,5 @@ public class PersonalExpenses extends ActionBarActivity {
 
         return mMonth;
     }
-
-
-
 
 }

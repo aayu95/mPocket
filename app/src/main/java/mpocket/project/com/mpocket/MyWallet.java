@@ -21,7 +21,7 @@ import java.util.zip.Inflater;
 public class MyWallet extends ActionBarActivity {
 
     Context context = this;
-
+    BalanceDatabase balanceDb = new BalanceDatabase(this);
     TextView balance;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +31,11 @@ public class MyWallet extends ActionBarActivity {
         getSupportActionBar().setTitle("myWallet");
 
         balance = (TextView) findViewById(R.id.balance);
+        BalanceDatabase balanceDb = new BalanceDatabase(this);
 
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/digital-7 (mono).ttf");
         balance.setTypeface(tf);
-
+        balanceDb.close();
     }
     /*
     *  Starts Dialog Activity
@@ -47,14 +48,21 @@ public class MyWallet extends ActionBarActivity {
 
         customDialog.setView(dialogView);
 
-        EditText userInput = (EditText) dialogView
+        final EditText userInput = (EditText) dialogView
                 .findViewById(R.id.amountTextview);
 
         customDialog.setCancelable(true);
         customDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(), "Amount Added Succesfully" ,Toast.LENGTH_SHORT).show();
+                BalanceDatabase db = new BalanceDatabase(getApplicationContext());
+                float amount;
+                if (userInput.getText().toString().equals("")) {
+                    amount = 0;
+                } else {
+                    amount = Float.parseFloat(userInput.getText().toString());
+                }
+                Toast.makeText(getApplicationContext(), "Amount Added Succesfully", Toast.LENGTH_SHORT).show();
             }
         });
         customDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

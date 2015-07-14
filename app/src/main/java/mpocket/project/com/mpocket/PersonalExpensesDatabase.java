@@ -16,7 +16,7 @@ import java.util.List;
 public class PersonalExpensesDatabase extends SQLiteOpenHelper {
 
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 4;
 
     // Database Name
     private static final String DATABASE_NAME = "mPocket";

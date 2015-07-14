@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class LoanDatabase extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 4;
 
     // Database Name
     private static final String DATABASE_NAME = "mPocket";
@@ -26,16 +26,16 @@ public class LoanDatabase extends SQLiteOpenHelper {
     //Table columns
     private static final String KEY_ID = "id";
     private static final String KEY_AMOUNT = "amount";
-    private static final String KEY_LEND_FROM= "borrowed from";
-    private static final String KEY_LEND_ON = "borrow date";
-    private static final String KEY_RETURN_BY = "returning date";
+    private static final String KEY_LEND_FROM= "borrowed_from";
+    private static final String KEY_LEND_ON = "borrow_date";
+    private static final String KEY_RETURN_BY = "returning_date";
 
     public LoanDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public void onCreate(SQLiteDatabase db) {
         String query = "create table " + TABLE_NAME + "(" +
                 KEY_ID + " integer primary key autoincrement, " +
                 KEY_AMOUNT + " real, " +
@@ -49,10 +49,9 @@ public class LoanDatabase extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("drop table if exists " + TABLE_NAME);
         onCreate(db);
-        db.close();
     }
 
     public void addNewLoan(LoanData data) {
@@ -65,7 +64,6 @@ public class LoanDatabase extends SQLiteOpenHelper {
         values.put(KEY_RETURN_BY, data.get_return_by());
 
         db.insert(TABLE_NAME, null, values);
-        db.close();
     }
 
     public void deleteLoan(LoanData data) {
@@ -113,5 +111,21 @@ public class LoanDatabase extends SQLiteOpenHelper {
         }
         db.close();
         return loanList;
+    }
+
+    public boolean isTableEmpty() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String count = "SELECT count(*) FROM " + TABLE_NAME;
+        Cursor mcursor = db.rawQuery(count, null);
+        mcursor.moveToFirst();
+        int icount = mcursor.getInt(0);
+
+        if (icount > 0) {
+            db.close();
+            return false;
+        } else {
+            db.close();
+            return true;
+        }
     }
 }

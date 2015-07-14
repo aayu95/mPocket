@@ -50,10 +50,23 @@
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".NewLoan"
+            android:parentActivityName=".Loans"
+            android:screenOrientation="portrait" />
+
+
         <!-- Debts Activity -->
         <activity
             android:name=".Debts"
             android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+
+
+        <!-- Debts Activity -->
+        <activity
+            android:name=".NewDebt"
+            android:parentActivityName=".Debts"
             android:screenOrientation="portrait" />
 
     </application>

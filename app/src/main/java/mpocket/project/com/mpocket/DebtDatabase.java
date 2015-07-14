@@ -14,7 +14,7 @@ import java.util.List;
  * Created by abhishek on 14/7/15.
  */
 public class DebtDatabase extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 4;
 
     // Database Name
     private static final String DATABASE_NAME = "mPocket";
@@ -25,16 +25,16 @@ public class DebtDatabase extends SQLiteOpenHelper {
     //Table columns
     private static final String KEY_ID = "id";
     private static final String KEY_AMOUNT = "amount";
-    private static final String KEY_LEND_TO= "lend to";
-    private static final String KEY_LEND_ON = "lend on";
-    private static final String KEY_RETURN_BY = "returning date";
+    private static final String KEY_LEND_TO= "lend_to";
+    private static final String KEY_LEND_ON = "lend_on";
+    private static final String KEY_RETURN_BY = "returning_date";
 
     public DebtDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public void onCreate(SQLiteDatabase db) {
         String query = "create table " + TABLE_NAME + "(" +
                 KEY_ID + " integer primary key autoincrement, " +
                 KEY_AMOUNT + " real, " +
@@ -48,10 +48,9 @@ public class DebtDatabase extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("drop table if exists " + TABLE_NAME);
         onCreate(db);
-        db.close();
     }
 
     public void addNewDebt(DebtData data) {
@@ -64,7 +63,6 @@ public class DebtDatabase extends SQLiteOpenHelper {
         values.put(KEY_RETURN_BY, data.get_return_by());
 
         db.insert(TABLE_NAME, null, values);
-        db.close();
     }
 
     public void deleteDebt(DebtData data) {
@@ -76,6 +74,7 @@ public class DebtDatabase extends SQLiteOpenHelper {
 
     public void editDebt(DebtData data) {
         SQLiteDatabase db = this.getWritableDatabase();
+
         ContentValues values = new ContentValues();
         values.put(KEY_AMOUNT, data.get_amount());
         values.put(KEY_LEND_TO, data.get_lend_to());
@@ -112,5 +111,21 @@ public class DebtDatabase extends SQLiteOpenHelper {
         }
         db.close();
         return debtList;
+    }
+
+    public boolean isTableEmpty() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String count = "SELECT count(*) FROM " + TABLE_NAME;
+        Cursor mcursor = db.rawQuery(count, null);
+        mcursor.moveToFirst();
+        int icount = mcursor.getInt(0);
+
+        if (icount > 0) {
+            db.close();
+            return false;
+        } else {
+            db.close();
+            return true;
+        }
     }
 }
