@@ -33,6 +33,7 @@ public class NewLoan extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_new_loan);
+        getSupportActionBar().setTitle("Add new Loan");
     }
 
     public void AddLoan(View view) {

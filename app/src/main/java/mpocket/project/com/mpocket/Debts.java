@@ -43,6 +43,7 @@ public class Debts extends ActionBarActivity{
         setContentView(R.layout.debts);
         emptyListLinearLayout = (View) findViewById(R.id.emptyList);
         debtList = (ListView) findViewById(R.id.debtList);
+        getSupportActionBar().setTitle("myDebts");
         registerForContextMenu(debtList);
         printDebts();
 

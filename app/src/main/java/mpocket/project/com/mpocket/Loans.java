@@ -35,6 +35,7 @@ public class Loans extends ActionBarActivity {
         emptyListLinearLayout = (View) findViewById(R.id.emptyList);
         loanList = (ListView) findViewById(R.id.loanList);
         registerForContextMenu(loanList);
+        getSupportActionBar().setTitle("myLoans");
         printLoans();
     }
 
