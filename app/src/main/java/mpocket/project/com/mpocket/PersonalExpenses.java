@@ -145,6 +145,7 @@ public class PersonalExpenses extends ActionBarActivity {
         final EditText purposeText = (EditText) dialogView.findViewById(R.id.purpose);
         final EditText amountText = (EditText) dialogView.findViewById(R.id.amount);
         final EditText dateText = (EditText) dialogView.findViewById(R.id.dateEdit);
+        final float oldAmount = data.get_amount();
 
         purposeText.setText(data.get_purpose());
         amountText.setText(""+data.get_amount());
@@ -168,12 +169,16 @@ public class PersonalExpenses extends ActionBarActivity {
                         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                     }
                 } else {
+                    BalanceDatabase bDB = new BalanceDatabase(getApplicationContext());
                     float amount = Float.parseFloat(String.valueOf(amountText.getText()));
                     String date = String.valueOf(dateText.getText());
                     String purpose = String.valueOf(purposeText.getText());
                     newData.set_amount(amount);
                     newData.set_purpose(purpose);
                     newData.set_date(date);
+                    bDB.addAmount(oldAmount);
+                    bDB.subtractAmount(amount);
+                    bDB.close();
                     PersonalExpensesDatabase db = new PersonalExpensesDatabase(context);
                     db.editContact(newData);
                     if (ALL_EXPENSES_VISIBLE) {
@@ -253,7 +258,10 @@ public class PersonalExpenses extends ActionBarActivity {
                 } else {
                     float amount = Float.parseFloat(String.valueOf(amountText.getText()));
                     PersonalExpensesData newData = new PersonalExpensesData(amount, purpose, date);
+                    BalanceDatabase bDB = new BalanceDatabase(getApplicationContext());
                     db.addNewExpense(newData);
+                    bDB.subtractAmount(newData.get_amount());
+                    bDB.close();
                     showCurrentDayExpenses();
                     Toast.makeText(getApplicationContext(), "Expenditure Added", Toast.LENGTH_SHORT).show();
                     db.close();

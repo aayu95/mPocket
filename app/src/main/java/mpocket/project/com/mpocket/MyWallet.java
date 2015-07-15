@@ -31,11 +31,7 @@ public class MyWallet extends ActionBarActivity {
         getSupportActionBar().setTitle("myWallet");
 
         balance = (TextView) findViewById(R.id.balance);
-        BalanceDatabase balanceDb = new BalanceDatabase(this);
-
-        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/digital-7 (mono).ttf");
-        balance.setTypeface(tf);
-        balanceDb.close();
+        printAmount();
     }
     /*
     *  Starts Dialog Activity
@@ -58,11 +54,14 @@ public class MyWallet extends ActionBarActivity {
                 BalanceDatabase db = new BalanceDatabase(getApplicationContext());
                 float amount;
                 if (userInput.getText().toString().equals("")) {
-                    amount = 0;
+                    Toast.makeText(getApplicationContext(), "Amount not added because you left the field blank", Toast.LENGTH_LONG).show();
                 } else {
                     amount = Float.parseFloat(userInput.getText().toString());
+                    db.addAmount(amount);
+                    db.close();
+                    Toast.makeText(getApplicationContext(), "Amount Added Succesfully", Toast.LENGTH_SHORT).show();
+                    printAmount();
                 }
-                Toast.makeText(getApplicationContext(), "Amount Added Succesfully", Toast.LENGTH_SHORT).show();
             }
         });
         customDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -73,5 +72,15 @@ public class MyWallet extends ActionBarActivity {
         });
 
         customDialog.create().show();
+    }
+
+    public void printAmount() {
+        BalanceDatabase db = new BalanceDatabase(this);
+        BalanceData data = db.returnOldAmount();
+        balance = (TextView) findViewById(R.id.balance);
+        balance.setText(""+data.get_amount());
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/digital-7 (mono).ttf");
+        balance.setTypeface(tf);
+        db.close();
     }
 }

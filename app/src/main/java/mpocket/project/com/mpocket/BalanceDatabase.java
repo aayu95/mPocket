@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by abhishek on 15/7/15.
  */
@@ -45,16 +48,108 @@ public class BalanceDatabase extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void add(float amount) {
+    public void addBalance(BalanceData data) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(KEY_AMOUNT, amount);
+        values.put(KEY_AMOUNT, data.get_amount());
 
 
         db.insert(TABLE_NAME, null, values);
+        Log.d("Error", "Added Balance");
         db.close();
     }
 
+
+
+    public List<BalanceData> showAll() {
+        List<BalanceData> contactList = new ArrayList<BalanceData>();
+
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                BalanceData contact = new BalanceData();
+                contact.set_id(Integer.parseInt(cursor.getString(0)));
+                contact.set_amount(Float.parseFloat(cursor.getString(1)));
+                // Adding contact to list
+                contactList.add(contact);
+            } while (cursor.moveToNext());
+        }
+
+        return contactList;
+    }
+
+    public BalanceData returnOldAmount() {
+
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME + " where id = 1";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        cursor.moveToFirst();
+                BalanceData contact = new BalanceData();
+                contact.set_id(Integer.parseInt(cursor.getString(0)));
+                contact.set_amount(Float.parseFloat(cursor.getString(1)));
+
+
+        return contact;
+    }
+
+    public void addAmount(float amount) {
+        BalanceData data = returnOldAmount();
+        amount = data.get_amount() + amount;
+        data.set_amount(amount);
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_AMOUNT, data.get_amount());
+        db.update(TABLE_NAME, values, KEY_ID + " = ?",
+                new String[]{String.valueOf(data.get_id())});
+
+        db.close();
+    }
+
+    public void subtractAmount(float amount) {
+        BalanceData data = returnOldAmount();
+        amount = data.get_amount() - amount;
+        data.set_amount(amount);
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_AMOUNT, data.get_amount());
+        db.update(TABLE_NAME, values, KEY_ID + " = ?",
+                new String[]{String.valueOf(data.get_id())});
+
+        db.close();
+    }
+
+    public void deleteLoan(LoanData data) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, KEY_ID + " = ?",
+                new String[]{String.valueOf(data.get_id())});
+        db.close();
+    }
+
+    public int ifTableIsEmpty() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String count = "SELECT count(*) FROM " + TABLE_NAME;
+        Cursor mcursor = db.rawQuery(count, null);
+        mcursor.moveToFirst();
+        int icount = mcursor.getInt(0);
+
+        if (icount > 0) {
+            db.close();
+            return icount;
+        } else {
+            db.close();
+            return icount;
+        }
+    }
 
 }

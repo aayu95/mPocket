@@ -3,7 +3,10 @@ package mpocket.project.com.mpocket;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -33,4 +36,5 @@ public class MainActivity extends ActionBarActivity {
         Intent go = new Intent(this, Debts.class);
         startActivity(go);
     }
+
 }

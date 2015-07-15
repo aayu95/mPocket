@@ -58,6 +58,9 @@ public class Loans extends ActionBarActivity {
                 String returnDate = data.getStringExtra("Returning_Date");
                 LoanData loanData = new LoanData(amount, name, borrowDate, returnDate);
                 db.addNewLoan(loanData);
+                BalanceDatabase bDb = new BalanceDatabase(this);
+                bDb.addAmount(amount);
+                bDb.close();
                 db.close();
                 printLoans();
             }

@@ -99,6 +99,9 @@ public class Debts extends ActionBarActivity{
                 String borrowDate = data.getStringExtra("Borrowing_Date");
                 String returnDate = data.getStringExtra("Returning_Date");
                 DebtData debtData = new DebtData(amount, name, borrowDate, returnDate);
+                BalanceDatabase bDB= new BalanceDatabase(this);
+                bDB.subtractAmount(amount);
+                bDB.close();
                 db.addNewDebt(debtData);
                 db.close();
                 Toast.makeText(this, "Details Added", Toast.LENGTH_SHORT).show();
