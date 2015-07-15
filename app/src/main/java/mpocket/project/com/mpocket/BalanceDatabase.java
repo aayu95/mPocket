@@ -84,6 +84,19 @@ public class BalanceDatabase extends SQLiteOpenHelper {
         return contactList;
     }
 
+    public void resetData() {
+        BalanceData data = returnOldAmount();
+        data.set_amount(00);
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_AMOUNT, data.get_amount());
+        db.update(TABLE_NAME, values, KEY_ID + " = ?",
+                new String[]{String.valueOf(data.get_id())});
+
+        db.close();
+    }
+
     public BalanceData returnOldAmount() {
 
         String selectQuery = "SELECT  * FROM " + TABLE_NAME + " where id = 1";
