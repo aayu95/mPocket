@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -50,7 +51,7 @@ public class Loans extends ActionBarActivity {
 
         if (requestCode == SEND_CODE) {
             if (resultCode == RESULT_OK) {
-                LoanDatabase db = new LoanDatabase(this);
+                DatabaseHandler db = new DatabaseHandler(this);
 
                 String userAmount = data.getStringExtra("User_Amount");
                 Float amount = Float.parseFloat(userAmount);
@@ -59,7 +60,7 @@ public class Loans extends ActionBarActivity {
                 String returnDate = data.getStringExtra("Returning_Date");
                 LoanData loanData = new LoanData(amount, name, borrowDate, returnDate);
                 db.addNewLoan(loanData);
-                BalanceDatabase bDb = new BalanceDatabase(this);
+                DatabaseHandler bDb = new DatabaseHandler(this);
                 bDb.addAmount(amount);
                 bDb.close();
                 db.close();
@@ -79,7 +80,7 @@ public class Loans extends ActionBarActivity {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        LoanDatabase db = new LoanDatabase (this);
+        DatabaseHandler db = new DatabaseHandler (this);
 
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         LoanData data = (LoanData) loanList.getItemAtPosition(info.position);
@@ -96,8 +97,8 @@ public class Loans extends ActionBarActivity {
         }
     }
     private void printLoans() {
-        LoanDatabase db = new LoanDatabase(this);
-        if (db.isTableEmpty()) {
+        DatabaseHandler db = new DatabaseHandler(this);
+        if (db.isLoanEmpty()) {
             emptyListLinearLayout.setVisibility(View.VISIBLE);
             loanList.setVisibility(View.GONE);
             TextView emptyText = (TextView) findViewById(R.id.emptyListText);
@@ -112,6 +113,7 @@ public class Loans extends ActionBarActivity {
             LoanListCustomAdapter adapter = new LoanListCustomAdapter(this, loanData);
             loanList.setAdapter(adapter);
         }
+        Log.d("Error", "Printing Loans");
         db.close();
     }
 }

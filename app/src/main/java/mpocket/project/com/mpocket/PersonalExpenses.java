@@ -104,7 +104,7 @@ public class PersonalExpenses extends ActionBarActivity {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        PersonalExpensesDatabase db = new PersonalExpensesDatabase(this);
+        DatabaseHandler db = new DatabaseHandler(this);
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         PersonalExpensesData data = (PersonalExpensesData) expenseList.getItemAtPosition(info.position);
 
@@ -169,7 +169,7 @@ public class PersonalExpenses extends ActionBarActivity {
                         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    BalanceDatabase bDB = new BalanceDatabase(getApplicationContext());
+                    DatabaseHandler bDB = new DatabaseHandler(getApplicationContext());
                     float amount = Float.parseFloat(String.valueOf(amountText.getText()));
                     String date = String.valueOf(dateText.getText());
                     String purpose = String.valueOf(purposeText.getText());
@@ -179,7 +179,7 @@ public class PersonalExpenses extends ActionBarActivity {
                     bDB.addAmount(oldAmount);
                     bDB.subtractAmount(amount);
                     bDB.close();
-                    PersonalExpensesDatabase db = new PersonalExpensesDatabase(context);
+                    DatabaseHandler db = new DatabaseHandler(context);
                     db.editContact(newData);
                     if (ALL_EXPENSES_VISIBLE) {
                         showAllExpensesTillDate();
@@ -249,7 +249,7 @@ public class PersonalExpenses extends ActionBarActivity {
                 String date =  makeDate(Day, (Month + 1), Year);
                 String purpose = String.valueOf(purposeText.getText());
 
-                PersonalExpensesDatabase db = new PersonalExpensesDatabase(context);
+                DatabaseHandler db = new DatabaseHandler(context);
                 if (amountText.getText().toString().equals("") || purposeText.getText().toString().equals("")) {
                     amountText.setError("Enter an amount");
                     purposeText.setError("Enter a purpose");
@@ -258,7 +258,7 @@ public class PersonalExpenses extends ActionBarActivity {
                 } else {
                     float amount = Float.parseFloat(String.valueOf(amountText.getText()));
                     PersonalExpensesData newData = new PersonalExpensesData(amount, purpose, date);
-                    BalanceDatabase bDB = new BalanceDatabase(getApplicationContext());
+                    DatabaseHandler bDB = new DatabaseHandler(getApplicationContext());
                     db.addNewExpense(newData);
                     bDB.subtractAmount(newData.get_amount());
                     bDB.close();
@@ -318,7 +318,7 @@ public class PersonalExpenses extends ActionBarActivity {
     private void printExpenses() {
 
 
-        PersonalExpensesDatabase db = new PersonalExpensesDatabase(this);
+        DatabaseHandler db = new DatabaseHandler(this);
 
         //Gets date from this activity
 
@@ -328,7 +328,7 @@ public class PersonalExpenses extends ActionBarActivity {
 
         View emptyLinearLayout = findViewById(R.id.frame);
 
-        int count = db.isTableEmpty(date);
+        int count = db.isExpensesEmpty(date);
 
         if (count == 0) {
             expenseList.setVisibility(View.GONE);
@@ -361,11 +361,11 @@ public class PersonalExpenses extends ActionBarActivity {
         TextView setDateText = (TextView) findViewById(R.id.dateText);
         setDateText.setText("All Expenses");
 
-        PersonalExpensesDatabase db = new PersonalExpensesDatabase(this);
+        DatabaseHandler db = new DatabaseHandler(this);
 
         View emptyLinearLayout = findViewById(R.id.frame);
 
-        int count = db.isTableEmpty();
+        int count = db.isExpensesEmpty();
 
         if (count == 0) {
             expenseList.setVisibility(View.GONE);

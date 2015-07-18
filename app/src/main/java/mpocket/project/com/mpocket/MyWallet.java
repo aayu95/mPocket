@@ -23,7 +23,7 @@ import java.util.zip.Inflater;
 public class MyWallet extends ActionBarActivity {
 
     Context context = this;
-    BalanceDatabase balanceDb = new BalanceDatabase(this);
+    DatabaseHandler balanceDb = new DatabaseHandler(this);
     TextView balance;
 
     @Override
@@ -62,7 +62,7 @@ public class MyWallet extends ActionBarActivity {
     }
 
     private void resetAccount() {
-        BalanceDatabase db = new BalanceDatabase(this);
+        DatabaseHandler db = new DatabaseHandler(this);
         db.resetData();
         db.close();
         printAmount();
@@ -86,7 +86,7 @@ public class MyWallet extends ActionBarActivity {
         customDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                BalanceDatabase db = new BalanceDatabase(getApplicationContext());
+                DatabaseHandler db = new DatabaseHandler(getApplicationContext());
                 float amount;
                 if (userInput.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "Amount not added because you left the field blank", Toast.LENGTH_LONG).show();
@@ -110,7 +110,7 @@ public class MyWallet extends ActionBarActivity {
     }
 
     public void printAmount() {
-        BalanceDatabase db = new BalanceDatabase(this);
+        DatabaseHandler db = new DatabaseHandler(this);
         BalanceData data = db.returnOldAmount();
         balance = (TextView) findViewById(R.id.balance);
         balance.setText(""+data.get_amount());

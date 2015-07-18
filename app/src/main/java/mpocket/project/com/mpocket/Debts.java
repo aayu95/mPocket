@@ -67,7 +67,7 @@ public class Debts extends ActionBarActivity{
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        DebtDatabase db = new DebtDatabase (this);
+        DatabaseHandler db = new DatabaseHandler(this);
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         DebtData data = (DebtData) debtList.getItemAtPosition(info.position);
 
@@ -88,7 +88,7 @@ public class Debts extends ActionBarActivity{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        DebtDatabase db = new DebtDatabase(this);
+        DatabaseHandler db = new DatabaseHandler(this);
 
         // new Debt Details
         if (requestCode == SEND_CODE) {
@@ -100,7 +100,7 @@ public class Debts extends ActionBarActivity{
                 String borrowDate = data.getStringExtra("Borrowing_Date");
                 String returnDate = data.getStringExtra("Returning_Date");
                 DebtData debtData = new DebtData(amount, name, borrowDate, returnDate);
-                BalanceDatabase bDB= new BalanceDatabase(this);
+                DatabaseHandler bDB= new DatabaseHandler(this);
                 bDB.subtractAmount(amount);
                 bDB.close();
                 db.addNewDebt(debtData);
@@ -114,8 +114,8 @@ public class Debts extends ActionBarActivity{
 
 
     private void printDebts() {
-        DebtDatabase db = new DebtDatabase(this);
-        if (db.isTableEmpty()) {
+        DatabaseHandler db = new DatabaseHandler(this);
+        if (db.isDebtEmpty()) {
             emptyListLinearLayout.setVisibility(View.VISIBLE);
             debtList.setVisibility(View.GONE);
             TextView emptyText = (TextView) findViewById(R.id.emptyListText);
