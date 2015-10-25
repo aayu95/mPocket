@@ -23,22 +23,29 @@
         android:orientation="horizontal"
         android:layout_weight="1">
 
-        <ImageButton
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:text="   Wallet   "
+            android:textStyle="italic|bold"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            android:textSize="30sp"
             android:onClick="MyWalletActivity"
-            android:src="@drawable/ic_launcher"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
-            android:background="#fff7f47d"/>
+            android:background="#fff7f47d" />
 
 
-        <ImageButton
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:onClick="generateMessage"
+            android:text="Expenses"
+            android:textStyle="italic|bold"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            android:textSize="30sp"
+            android:onClick="PersonalExpensesActivity"
             android:layout_marginLeft="5dp"
             android:layout_marginBottom="5dp"
             android:src="@drawable/ic_launcher"
@@ -53,24 +60,30 @@
         android:orientation="horizontal"
         android:layout_weight="1">
 
-        <ImageButton
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_marginRight="5dp"
-            android:onClick="generateMessage"
+            android:onClick="DebtActivity"
             android:layout_marginTop="5dp"
-            android:src="@drawable/ic_launcher"
+            android:text="Debts"
+            android:textStyle="italic|bold"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            android:textSize="30sp"
             android:background="#ff66e06c" />
 
-        <ImageButton
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
-            android:onClick="generateMessage"
-            android:src="@drawable/ic_launcher"
+            android:onClick="LoanActivity"
+            android:text="Loans"
+            android:textStyle="italic|bold"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            android:textSize="30sp"
             android:background="#f44336" />
 
     </LinearLayout>

@@ -5,14 +5,16 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
 
         <!-- SplashScreen -->
         <activity
             android:name=".SplashScreen"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:theme="@style/SplashScreenTheme"
+            android:screenOrientation="portrait" >
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,15 +27,49 @@
         <!-- MainActivity -->
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
 
         </activity>
 
-        <!-- MainActivity -->
+        <!-- MyWallet -->
         <activity
             android:name=".MyWallet"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"/>
+
+        <!--PersonalExpenses-->
+        <activity
+            android:name=".PersonalExpenses"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- Loans Activity -->
+        <activity
+            android:name=".Loans"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".NewLoan"
+            android:parentActivityName=".Loans"
+            android:screenOrientation="portrait" />
+
+
+        <!-- Debts Activity -->
+        <activity
+            android:name=".Debts"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+
+
+        <!-- Debts Activity -->
+        <activity
+            android:name=".NewDebt"
+            android:parentActivityName=".Debts"
+            android:screenOrientation="portrait" />
 
     </application>
+
 
 </manifest>
